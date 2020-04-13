@@ -297,6 +297,7 @@ export default AdComponent.extend({
   @discourseComputed(
     "publisherId",
     "showToTrustLevel",
+    "showToAnon",
     "showToGroups",
     "showAfterPost",
     "showOnCurrentPage",
@@ -305,6 +306,7 @@ export default AdComponent.extend({
   showAd(
     publisherId,
     showToTrustLevel,
+    showToAnon,
     showToGroups,
     showAfterPost,
     showOnCurrentPage,
@@ -313,6 +315,7 @@ export default AdComponent.extend({
     return (
       publisherId &&
       showToTrustLevel &&
+      showToAnon &&
       showToGroups &&
       showAfterPost &&
       showOnCurrentPage &&
@@ -325,6 +328,11 @@ export default AdComponent.extend({
     return !(
       trustLevel && trustLevel > this.siteSettings.dfp_through_trust_level
     );
+  },
+
+  @discourseComputed("currentUser")
+  showToAnon(currentUser) {
+    return !!currentUser;
   },
 
   @discourseComputed("postNumber")
